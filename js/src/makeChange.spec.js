@@ -68,5 +68,41 @@ describe('when making USD change', () => {
         });
     });
 
+
+    describe('of 56 cents', () => {
+        let dollars = .56;
+        it('it should return 2 quarters 1 nickel 1 penny', () => {
+            makeChange(dollars).should.deep.equal({
+                "quarter":2,
+                "nickels":1,
+                "pennies":1
+            });
+        });
+    });
+
+
+    describe('of 66 cents', () => {
+        let dollars = .66;
+        it('it should return 2 quarters 1 dime 1 nickel 1 penny', () => {
+            makeChange(dollars).should.deep.equal({
+                "quarter":2,
+                "dimes":1,
+                "nickels":1,
+                "pennies":1
+            });
+        });
+    });
+
+
+    describe('of 1 dollar 1 cents', () => {
+        let dollars = 1.01;
+        it('it should return 4 quarters 1 penny', () => {
+            makeChange(dollars).should.deep.equal({
+                "quarter":4,
+                "pennies":1
+            });
+        });
+    });
+
 });
 

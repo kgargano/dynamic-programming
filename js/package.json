@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "dynamic-programming",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r specSetup.js --compilers=js:babel-register src/**/*.spec.js --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kgargano/dynamic-programming.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kgargano/dynamic-programming/issues"
+  },
+  "homepage": "https://github.com/kgargano/dynamic-programming#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-register": "^6.11.6",
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "webpack": "^1.13.2"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}

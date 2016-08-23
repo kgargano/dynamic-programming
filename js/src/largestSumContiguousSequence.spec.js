@@ -42,6 +42,14 @@ describe('when running a sequence [-1, -10, -3, -5]', () => {
     });
 });
 
+
+describe('when running a sequence [-3, -2, -1]', () => {
+    let sequence = [-3, -2, -1]
+    it('it should return -1 as the max', () => {
+        largestSumContiguousSequence(sequence).should.equal(-1);
+    });
+});
+
 describe('when running a sequence [-12, -10, -3, -5]', () => {
     let sequence = [-12, -10, -3, -5]
     it('it should return -3 as the max', () => {

@@ -16,8 +16,8 @@ describe('when running a sequence [-1, -2, -3]', () => {
 
 describe('when running a sequence [1, -1, 2, 3]', () => {
     let sequence = [1, -1, 2, 3];
-    it('it should return [-1, 2, 3]', () => {
-        longestIncreasingSubsequence(sequence).should.deep.equal([-1, 2, 3]);
+    it('it should return [1, 2, 3]', () => {
+        longestIncreasingSubsequence(sequence).should.deep.equal([1, 2, 3]);
     });
 });
 

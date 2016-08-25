@@ -3,10 +3,10 @@ export default (sequence)=> {
     let subsequences = [];
 
     sequence.forEach((element)=>{
-        let matchingSubsequences = subsequences.filter((subsequence)=> { return subsequence[0] > element });
+        let matchingSubsequences = subsequences.filter((subsequence)=> element > subsequence[0]);
 
         if(matchingSubsequences.length > 0){
-            matchingSubsequences.forEach((subsequence)=>{subsequence.unshift(element);})
+            matchingSubsequences.forEach((subsequence)=>subsequence.unshift(element))
         }else{
             subsequences.push([element]);
         }

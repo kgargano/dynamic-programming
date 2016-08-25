@@ -8,7 +8,7 @@ export default (sequence)=> {
         if(matchingSubsequences.length > 0){
             matchingSubsequences.forEach((subsequence)=>{subsequence.unshift(element);})
         }else{
-            matchingSubsequences.push([element]);
+            subsequences.push([element]);
         }
     });
 

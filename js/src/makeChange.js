@@ -15,7 +15,7 @@ export default (dollars)=> {
         changeStack.push({name:coin, value: Math.round(changeSystem[coin] * 100)});
     }
 
-    changeStack = changeStack.sort((coin)=> coin.value);
+    changeStack = changeStack.sort((coin1, coin2)=> coin2.value - coin1.value);
 
     while(changeStack.length > 0){
         let coin = changeStack.shift();

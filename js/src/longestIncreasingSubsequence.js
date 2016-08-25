@@ -1,23 +1,23 @@
 export default (sequence)=> {
 
-    let currentSubsequence = [],
-        longestSubsequence = [];
+    let subsequences = [];
 
     sequence.forEach((element)=>{
-        if(currentSubsequence.length == 0){
-            currentSubsequence.push(element);
-        }
+        let matchingSubsequences = subsequences.filter((subsequence)=> { return subsequence[0] > element });
 
-        if(longestSubsequence.length < currentSubsequence.length){
-            longestSubsequence = currentSubsequence;
-        }
-
-        if(currentSubsequence[currentSubsequence.length-1] < element){
-            currentSubsequence.push(element);
+        if(matchingSubsequences.length > 0){
+            matchingSubsequences.forEach((subsequence)=>{subsequence.unshift(element);})
         }else{
-            currentSubsequence = [element];
+            matchingSubsequences.push([element]);
         }
     });
 
-    return longestSubsequence;
+    let increasingSubsequences = subsequences.sort((subsequence)=>{return subsequence.length;});
+    let longestIncreasingSubsequence = [];
+
+    if(increasingSubsequences.length > 0 && increasingSubsequences[0].length > 1){
+        longestIncreasingSubsequence = increasingSubsequences[0].reverse();
+    }
+
+    return longestIncreasingSubsequence;
 };

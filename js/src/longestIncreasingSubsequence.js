@@ -12,11 +12,12 @@ export default (sequence)=> {
         }
     });
 
-    let increasingSubsequences = subsequences.sort((subsequence)=>{return subsequence.length;});
+    subsequences = subsequences.map((ss)=> ss.reverse()).sort((ss1, ss2)=> ss2.length - ss1.length);
+
     let longestIncreasingSubsequence = [];
 
-    if(increasingSubsequences.length > 0 && increasingSubsequences[0].length > 1){
-        longestIncreasingSubsequence = increasingSubsequences[0].reverse();
+    if(subsequences.length > 0 && subsequences[0].length > 1){
+        longestIncreasingSubsequence = subsequences[0];
     }
 
     return longestIncreasingSubsequence;

@@ -17,14 +17,12 @@ export default (dollars)=> {
 
     changeStack = changeStack.sort((coin)=> coin.value);
 
-    let coin = changeStack.shift();
-    while(dollarsLeft > 0){
-        if(dollarsLeft >= coin.value){
+    while(changeStack.length > 0){
+        let coin = changeStack.shift();
+        while(dollarsLeft >= coin.value){
             if(!changeMade.hasOwnProperty(coin.name)){ changeMade[coin.name] = 0;}
             changeMade[coin.name]++;
             dollarsLeft -= coin.value;
-        } else{
-            coin = changeStack.shift();
         }
     }
 

@@ -62,7 +62,7 @@ describe('when making USD change', () => {
         let dollars = .55;
         it('it should return 2 quarters 1 nickel', () => {
             makeChange(dollars).should.deep.equal({
-                "quarter":2,
+                "quarters":2,
                 "nickels":1
             });
         });
@@ -73,7 +73,7 @@ describe('when making USD change', () => {
         let dollars = .56;
         it('it should return 2 quarters 1 nickel 1 penny', () => {
             makeChange(dollars).should.deep.equal({
-                "quarter":2,
+                "quarters":2,
                 "nickels":1,
                 "pennies":1
             });
@@ -85,7 +85,7 @@ describe('when making USD change', () => {
         let dollars = .66;
         it('it should return 2 quarters 1 dime 1 nickel 1 penny', () => {
             makeChange(dollars).should.deep.equal({
-                "quarter":2,
+                "quarters":2,
                 "dimes":1,
                 "nickels":1,
                 "pennies":1
@@ -98,7 +98,7 @@ describe('when making USD change', () => {
         let dollars = 1.01;
         it('it should return 4 quarters 1 penny', () => {
             makeChange(dollars).should.deep.equal({
-                "quarter":4,
+                "quarters":4,
                 "pennies":1
             });
         });

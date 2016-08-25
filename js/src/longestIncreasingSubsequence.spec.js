@@ -48,3 +48,12 @@ describe('when running a sequence [-1, -2, -1, 0, 1]', () => {
         longestIncreasingSubsequence(sequence).should.deep.equal([-2, -1, 0, 1]);
     });
 });
+
+
+
+describe('when running a sequence with a non-contiguous inreasing subsequence [-1, 1, -2, 2, -3, 3, -4, 4]', () => {
+    let sequence = [-1, 1, -2, 2, -3, 3, -4, 4];
+    it('it should return [-1, 1, 2, 3, 4]', () => {
+        longestIncreasingSubsequence(sequence).should.deep.equal([-1, 1, 2, 3, 4]);
+    });
+});

@@ -1,14 +1,13 @@
 
 
 export default (boxes)=>{
+    const orient = (side, box, sideIndex)=>{
+        return {l:side, w:box[(sideIndex+1)%3], h:box[(sideIndex+2)%3], base:side * box[(sideIndex+1)%3]};
+    };
 
-
-
-    const boxesSortedByArea = boxes.map((box)=>[
-            {l:box.a, w:box.b, h:box.c, base: box.a*box.b},
-            {l:box.b, w:box.c, h:box.a, base: box.b*box.c},
-            {l:box.c, w:box.a, h:box.b, base: box.c*box.a}
-            ].reduce((orientations, orientation)=>{
+    const boxesSortedByArea = boxes.map((box)=>
+            box.reduce((orientations, side, i)=>orientations.concat([orient(side, box, i)]), [])
+                .reduce((orientations, orientation)=>{
                 if(!orientations.find(o=> o.base == orientation.base)){
                     orientations.push(orientation)
                 }

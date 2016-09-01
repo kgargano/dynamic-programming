@@ -14,9 +14,11 @@ export default (boxes)=>{
                 return orientations;
             }, []))
         .reduce((all, orientations)=>orientations.concat(all), [])
-        .sort((box1, box2)=> box2 - box1);
+        .sort((box1, box2)=> box2.base - box1.base);
 
+    console.log('START SCENARIO')
     return boxesSortedByArea.reduce((stacks, box, ind)=>{
+        console.log(box)
         let stack = { boxes:[box], height:box.h };
         let lastBox = box;
         boxesSortedByArea.slice(ind+1, boxesSortedByArea.length).forEach((nextBox)=>{
@@ -27,6 +29,7 @@ export default (boxes)=>{
             }
         });
         stacks.push(stack);
+        console.log(stacks);
         return stacks;
     }, []).sort((stack1,stack2)=> stack2.height - stack1.height)[0];
 }

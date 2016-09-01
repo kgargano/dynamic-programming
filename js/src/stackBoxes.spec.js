@@ -24,10 +24,23 @@ describe('when stacking cube boxes of different sizes ', () => {
 
 describe('when stacking mixed dimension boxes', ()=>{
     describe('for example [1, 2, 3], [3, 3, 4]', ()=>{
-
         let stack = stackBoxes([[1, 2, 3], [3, 3, 4]]);
         it('it should have a stack height of 7', ()=>{
-
+            stack.height.should.equal(7);
         });
-    })
+    });
+
+    describe('for example [3, 1, 1], [4, 2, 5], [3, 8, 2]', ()=>{
+        let stack = stackBoxes([[3, 1, 1], [4, 2, 5], [3, 8, 2]]);
+        it('it should have a stack height of 13', ()=>{
+            stack.height.should.equal(13);
+        })
+    });
+
+    describe('for example [3, 1, 1], [4, 4, 5], [3, 8, 2]', ()=>{
+        let stack = stackBoxes([[3, 1, 1], [4, 4, 5], [3, 8, 2]]);
+        it('it should have a stack height of 16', ()=>{
+            stack.height.should.equal(16);
+        })
+    });
 });

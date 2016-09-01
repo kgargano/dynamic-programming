@@ -23,7 +23,6 @@ describe('when stacking cube boxes of different sizes ', () => {
 });
 
 describe('when stacking mixed dimension boxes', ()=>{
-
     describe('for example [1, 2, 3], [3, 3, 4]', ()=>{
 
         let stack = stackBoxes([[1, 2, 3], [3, 3, 4]]);
@@ -31,6 +30,4 @@ describe('when stacking mixed dimension boxes', ()=>{
 
         });
     })
-
-
-})
+});

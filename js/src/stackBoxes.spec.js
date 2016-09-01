@@ -1,23 +1,23 @@
 import stackBoxes from './stackBoxes'
 
-describe('when stacking one box', () => {
-    let boxes = [{a: 4, b: 3, c: 2}]
-    let stackedBoxes = stackBoxes(boxes);
+describe('when stacking one cube box', () => {
+    let stack = stackBoxes([{a: 1, b: 1, c: 1}]);
     it('it should return one box', () => {
-        stackedBoxes.l.should.equal(1)
+        stack.boxes.length.should.equal(1);
     });
-    it('it should orient the box with height 4', () => {
-        stackedBoxes[0].h.should.equal(4)
+    it('it should return a stack the height of a side', () => {
+        stack.height.should.equal(1)
     });
 });
 
 
-describe('when stacking a box x:{a:1, b:1, c:1} and y:{a:2, b:2, c:2}', () => {
+describe('when stacking cube boxes of different sizes ', () => {
+    let stack = stackBoxes([{a: 1, b: 1, c: 1}, {a:2, b:2, c:2}]);
 
-    let boxes = [{a: 4, b: 3, c: 2}]
-    let stackedBoxes = stackBoxes(boxes);
-
-    it('should stack x on top of y', ()=>{
-
+    it('it should stack the smallest on the top', ()=>{
+        stack.boxes[1].l.should.equal(1);
+    });
+    it('it should have a stack height of 3', ()=>{
+        stack.height.should.equal(3);
     });
 });

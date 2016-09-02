@@ -43,4 +43,11 @@ describe('when stacking mixed dimension boxes', ()=>{
             stack.height.should.equal(16);
         })
     });
+
+    describe('for example  [4, 6, 7], [1, 2, 3], [4, 5, 6], [10, 12, 32]', ()=>{
+        let stack = stackBoxes([[4, 6, 7], [1, 2, 3], [4, 5, 6], [10, 12, 32]]);
+        it('it should have a stack height of 60', ()=>{
+            stack.height.should.equal(60);
+        })
+    });
 });

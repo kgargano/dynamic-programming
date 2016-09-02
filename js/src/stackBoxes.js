@@ -14,17 +14,17 @@ export default (boxes)=>{
                 return orientations;
             }, []))
         .reduce((all, orientations)=>orientations.concat(all), [])
-        .sort((box1, box2)=> box2.base - box1.base);
+        .sort((box1, box2)=> box1.base - box2.base);
 
-    const boxesSortedByHeight = boxesSortedByArea.sort((box1, box2)=> box2.h - box1.h)
+    boxesSortedByArea.forEach((x)=>console.log(x))
 
     return boxesSortedByArea.reduce((stacks, box, ind)=>{
-        const canFit = (x, y)=> (x.l < y.l && x.w < y.w) || (x.l < y.w && x.w < y.l);
+        const canFit = (y, x)=> (x.l < y.l && x.w < y.w) || (x.l < y.w && x.w < y.l);
         let stack = { boxes:[box], height:box.h };
         let lastBox = box;
-        boxesSortedByHeight.slice(0, ind).concat(boxesSortedByHeight.slice(ind+1, boxesSortedByArea.length)).forEach((nextBox)=>{
+        boxesSortedByArea.forEach((nextBox)=>{
             if (canFit(nextBox, lastBox)){
-                stack.boxes.push(nextBox);
+                stack.boxes.unshift(nextBox);
                 lastBox = nextBox;
                 stack.height += lastBox.h;
             }

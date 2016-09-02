@@ -1,8 +1,9 @@
 
 
 export default (boxes)=>{
+    let id = 0;
     const orient = (side, box, sideIndex)=>{
-        return {l:side, w:box[(sideIndex+1)%3], h:box[(sideIndex+2)%3], base:side * box[(sideIndex+1)%3]};
+        return {l:side, w:box[(sideIndex+1)%3], h:box[(sideIndex+2)%3], base:side * box[(sideIndex+1)%3], id: id++};
     };
 
     const boxesSortedByArea = boxes.map((box)=>
@@ -15,8 +16,6 @@ export default (boxes)=>{
             }, []))
         .reduce((all, orientations)=>orientations.concat(all), [])
         .sort((box1, box2)=> box1.base - box2.base);
-
-    boxesSortedByArea.forEach((x)=>console.log(x))
 
     return boxesSortedByArea.reduce((stacks, box, ind)=>{
         const canFit = (y, x)=> (x.l < y.l && x.w < y.w) || (x.l < y.w && x.w < y.l);

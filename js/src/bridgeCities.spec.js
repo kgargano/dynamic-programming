@@ -42,19 +42,49 @@ describe('when there a large set of matching cities', ()=>{
             bridgedCities.should.equal('b');
         });
     });
+
+    //                [a, b, c, d, e, f, g]
     //                [c, a, e, g, f, b, d]
     describe('such as [a, b, c, d, e, f, g] and [c, a, e, g, f, b, d] ', ()=>{
         let bridgedCities = bridgeCities(['abcdefg', 'caegfbd']);
-        it('it should pair {a, 1}, {e, 2}, {f, 1} ', ()=> {
-            bridgedCities.should.equal('aef');
+        it('it should pair aef, cef, ceg ', ()=> {
+            bridgedCities.should.deep.equal(['aef', 'cef', 'ceg']);
         });
     });
 
+    //                [a, c, d, e, f, b, g]
     //                [c, d, e, g, f, b, a]
-    describe('such as [a, b, c, d, e, f, g] and [c, a, e, g, f, b, d] ', ()=>{
+    describe('such as [a, c, d, e, f, b, g] and [c, a, e, g, f, b, d] ', ()=>{
         let bridgedCities = bridgeCities(['abcdefg', 'caegfbd']);
-        it('it should pair {c, 2}, {d, 2}, {e, 2}, {g, 3} ', ()=> {
-            bridgedCities.should.deep.equal('cdeg');
+        it('it should pair cdefb', ()=> {
+            bridgedCities.should.equal('cdefb');
+        });
+    });
+
+
+    //a, 0, 6
+    //c, 6, 1
+    //d, 6, 1
+    //e, 6, 1
+    //f, 7, 0
+    //b, 7, 0
+    //g, 5, 3
+    //                [a, c, d, e, f, b, g]
+    //                [c, d, e, g, f, b, a]
+    describe('such as [a, c, d, e, f, b, g] and [c, a, e, g, f, b, d] ', ()=>{
+        let bridgedCities = bridgeCities(['caegfbd', 'abcdefg']);
+        it('it should pair cdefb', ()=> {
+            bridgedCities.should.equal('cdefb');
+        });
+    });
+
+
+    //                [e, a, c, g, f, e, d]
+    //                [c, a, e, g, f, b, d]
+    describe('such as [a, b, c, d, e, f, g] and [c, a, e, g, f, b, d] ', ()=>{
+        let bridgedCities = bridgeCities(['eacgfed', 'caegfbd']);
+        it('it should suggest egfd and agfd', ()=> {
+            bridgedCities.should.equal(['agfd', 'egfd']);
         });
     });
 });

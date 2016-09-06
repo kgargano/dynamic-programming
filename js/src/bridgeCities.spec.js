@@ -1,7 +1,7 @@
 import bridgeCities from './bridgeCities'
 
 describe('when there are no cities to bridge', ()=>{
-    let bridgedCities = bridgeCities([]);
+    let bridgedCities = bridgeCities(['', '']);
     it('it returns an empty result', ()=>{
         bridgedCities.should.deep.equal([]);
     });
@@ -56,8 +56,8 @@ describe('when there a large set of matching cities', ()=>{
     //                [c, d, e, g, f, b, a]
     describe('such as [a, c, d, e, f, b, g] and [c, a, e, g, f, b, d] ', ()=>{
         let bridgedCities = bridgeCities(['abcdefg', 'caegfbd']);
-        it('it should pair cdefb', ()=> {
-            bridgedCities.should.equal('cdefb');
+        it('it should pair bcdef', ()=> {
+            bridgedCities.should.equal('bcdef');
         });
     });
 
@@ -71,10 +71,13 @@ describe('when there a large set of matching cities', ()=>{
     //g, 5, 3
     //                [a, c, d, e, f, b, g]
     //                [c, d, e, g, f, b, a]
+    //at f, nothing past f on the north or south bank can go west of f.. or east of f...
+    //at b, nothing past b on the north or south bank can go west of b or east of b
+    //at c, nothing before c on the north bank can go east of c... hm..
     describe('such as [a, c, d, e, f, b, g] and [c, a, e, g, f, b, d] ', ()=>{
         let bridgedCities = bridgeCities(['caegfbd', 'abcdefg']);
-        it('it should pair cdefb', ()=> {
-            bridgedCities.should.equal('cdefb');
+        it('it should pair bcdef', ()=> {
+            bridgedCities.should.equal('bcdef');
         });
     });
 
@@ -84,7 +87,7 @@ describe('when there a large set of matching cities', ()=>{
     describe('such as [a, b, c, d, e, f, g] and [c, a, e, g, f, b, d] ', ()=>{
         let bridgedCities = bridgeCities(['eacgfed', 'caegfbd']);
         it('it should suggest egfd and agfd', ()=> {
-            bridgedCities.should.equal(['agfd', 'egfd']);
+            bridgedCities.should.equal('adfg');
         });
     });
 });

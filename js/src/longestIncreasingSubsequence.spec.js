@@ -57,3 +57,12 @@ describe('when running a sequence with a non-contiguous inreasing subsequence [-
         longestIncreasingSubsequence(sequence).should.deep.equal([-1, 1, 2, 3, 4]);
     });
 });
+
+
+
+describe('when running a sequence with a non-contiguous inreasing subsequence [1, 2, 5, 3, 4]', () => {
+    let sequence = [1, 2, 5, 3, 4];
+    it('it should return [1, 2, 3, 4]', () => {
+        longestIncreasingSubsequence(sequence).should.deep.equal([1, 2, 3, 4]);
+    });
+});

@@ -1,26 +1,24 @@
 export default (cities)=>{
     let n = cities[0].split(''),
         s = cities[1].split(''),
-        sLocations = s.reduce((map, city, index)=> { map[city] = index; return map; } , {}),
         nLocations = n.reduce((map, city, index)=>  { map[city] = index; return map; } , {}),
-        bridges = n.reduce((bridges, city, index)=> bridges.concat([{span: Math.abs(sLocations[city] - index), city:city}]), [])
-            .sort((bridge1, bridge2)=> bridge1.span-bridge2.span);
+        bridges = s.map((city, index)=> ({ south: index, north: nLocations[city], city }));
 
-    let max = 0,
-        min = n.length;
-
-    const comesBefore = (city1, city2)=> sLocations[city1] < sLocations[city2] && nLocations[city1] < nLocations[city2];
-    const comesAfter = (city1, city2)=> sLocations[city1] > sLocations[city2] && nLocations[city1] > nLocations[city2];
-
-    console.log("START")
+    console.log('start')
+    console.log('nlocations', nLocations, 'n', n, 's', s, 'bridges', bridges)
     return bridges.reduce((bridgedCities, bridge)=>{
-        console.log('bridge', bridge)
 
-        if(bridgedCities.every((b=> comesBefore(b.city, bridge.city) || comesAfter(b.city, bridge.city) ))){
-            console.log('added ', bridge)
-            bridgedCities.push(bridge);
+        let subsequences = bridgedCities.filter(b=> b[0].north < bridge.north);
+        console.log('subsequences', subsequences);
+        if(subsequences.length == 0){
+            bridgedCities.unshift([bridge]);
+            console.log('made a new one with ', bridge)
+        }else{
+            subsequences.forEach(b=> b.unshift(bridge));
+            console.log('adding to each found')
         }
 
+        console.log('bridgedCities', bridgedCities)
         return bridgedCities;
-    }, []).sort((b1, b2)=> b1.city > b2.city ? 1 : b2.city > b1.city ? -1 : 0).reduce((cities, next)=> cities+=next.city, '');
+    }, []).sort((b1, b2)=> b2.length - b1.length).map(b=> b.reverse().map(c=>c.city).join(''))[0];
 }

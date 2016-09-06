@@ -82,12 +82,12 @@ describe('when there a large set of matching cities', ()=>{
     });
 
 
-    //                [e, a, c, g, f, e, d]
+    //                [b, a, c, g, f, e, d]
     //                [c, a, e, g, f, b, d]
     describe('such as [a, b, c, d, e, f, g] and [c, a, e, g, f, b, d] ', ()=>{
-        let bridgedCities = bridgeCities(['eacgfed', 'caegfbd']);
+        let bridgedCities = bridgeCities(['bacgfed', 'caegfd']);
         it('it should suggest egfd and agfd', ()=> {
-            bridgedCities.should.equal('adfg');
+            bridgedCities.should.equal('agfd');
         });
     });
 });

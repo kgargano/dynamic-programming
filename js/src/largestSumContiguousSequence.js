@@ -22,5 +22,5 @@ export default (sequence)=> {
         return { subsequence, max, sum, maxSequence };
     }, {sum, max, maxSequence, subsequence:maxSequence});
 
-    return result.max;
+    return result;
 };

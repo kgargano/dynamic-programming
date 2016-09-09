@@ -1,17 +1,25 @@
 export default (sequence)=> {
     let sum = sequence[0];
     let max = sum;
+    let maxSequence = [sequence[0]];
 
-    sequence.slice(1).forEach( (element) => {
-        if( (sum + element) > sum && sum > 0){
+    sequence.slice(1).reduce( (subsequence, element) => {
+        sum = Math.max(sum, 0);
+
+        if( (sum + element) > 0){
             sum = sum + element;
-        } else {
+            subsequence.push(element);
+        } else if(sum + element <= 0){
             sum = element;
+            subsequence = [element];
         }
 
-        if(sum > max)
+        if(sum > max) {
             max = sum;
-    });
+            maxSequence = subsequence;
+        }
+        return subsequence;
+    }, [sequence[0]]);
 
     return max;
 };

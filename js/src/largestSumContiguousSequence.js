@@ -3,7 +3,8 @@ export default (sequence)=> {
     let max = sum;
     let maxSequence = [sequence[0]];
 
-    sequence.slice(1).reduce( (subsequence, element) => {
+    let result = sequence.slice(1).reduce( (current, element) => {
+        let { subsequence, max, sum, maxSequence } = current;
         sum = Math.max(sum, 0);
 
         if( (sum + element) > 0){
@@ -18,8 +19,8 @@ export default (sequence)=> {
             max = sum;
             maxSequence = subsequence;
         }
-        return subsequence;
-    }, [sequence[0]]);
+        return { subsequence, max, sum, maxSequence };
+    }, {sum, max, maxSequence, subsequence:maxSequence});
 
-    return max;
+    return result.max;
 };

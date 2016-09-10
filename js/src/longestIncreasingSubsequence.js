@@ -31,27 +31,28 @@ const unfoldLongestSubsequence = (sequence, tails, trace)=>{
 export default (sequence)=> {
     if(sequence.length == 0) return sequence;
 
-    let subsequenceTrace = Array.from(Array(sequence.length), () => null);
+    let trace = Array.from(Array(sequence.length), () => null);
 
 
-    let subsequenceTails = sequence.slice(1, sequence.length).reduce((subsequenceTails, element, index)=>{
-        index++;
-        let low = sequence[subsequenceTails[0]],
-            high = sequence[subsequenceTails[subsequenceTails.length-1]];
+    let tailIndices = sequence.reduce((tailIndices, element, index)=>{
+        if(tailIndices.length == 0) { return [0]; }
+
+        let low = sequence[tailIndices[0]],
+            high = sequence[tailIndices[tailIndices.length-1]];
 
         if(element > high){
-            subsequenceTrace[index] = subsequenceTails[subsequenceTails.length-1];
-            subsequenceTails.push(index);
+            trace[index] = tailIndices[tailIndices.length-1];
+            tailIndices.push(index);
         }
         else if (element < low){
-            subsequenceTails[0] = index;
+            tailIndices[0] = index;
         }else{
-            let indexToBump = findNextHighest(sequence, subsequenceTails, element);
-            subsequenceTails[indexToBump] = index;
-            subsequenceTrace[subsequenceTails[indexToBump]] = subsequenceTails[indexToBump-1];
+            let indexToBump = findNextHighest(sequence, tailIndices, element);
+            tailIndices[indexToBump] = index;
+            trace[tailIndices[indexToBump]] = tailIndices[indexToBump-1];
         }
-        return subsequenceTails;
-    }, [0]);
+        return tailIndices;
+    }, []);
 
-    return unfoldLongestSubsequence(sequence, subsequenceTails, subsequenceTrace);
+    return unfoldLongestSubsequence(sequence, tailIndices, trace);
 };

@@ -1,21 +1,17 @@
+//referenced this: https://github.com/mission-peace/interview/blob/master/src/com/interview/array/LongestIncreasingSubSequenceOlogNMethod.java
 const searchForBump = (sequence, subsequenceTails, element)=>{
     let low = 0,
         high = subsequenceTails.length;
 
-    let failsafe = 0;
-    while(high >= low && failsafe < 1000){
-
+    while(high >= low){
         let mid = Math.floor((high + low) / 2);
-        if(sequence[subsequenceTails[mid]] < element && element <= sequence[subsequenceTails[mid+1]]){
+        if(sequence[subsequenceTails[mid]] < element && sequence[subsequenceTails[mid+1]] >= element){
             return mid+1;
-        }
-        else if(sequence[subsequenceTails[mid]] < element){
+        } else if (sequence[subsequenceTails[mid]] < element){
             low = mid + 1;
         }else{
             high = mid - 1;
         }
-        failsafe++;
-
     }
     return high;
 };
@@ -57,22 +53,3 @@ export default (sequence)=> {
     longestSequence = longestSequence.reverse();
     return longestSequence;
 };
-
-
-
-function ceilIndex(input, T, end, s){
-    var start = 0;
-    var middle;
-    var len = end;
-    while(start <= end){
-        middle = Math.floor((start + end)/2);
-        if(middle < len && input[T[middle]] < s && s <= input[T[middle+1]]){
-            return middle+1;
-        }else if(input[T[middle]] < s){
-            start = middle+1;
-        }else{
-            end = middle-1;
-        }
-    }
-    return -1;
-}

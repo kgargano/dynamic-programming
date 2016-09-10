@@ -32,23 +32,23 @@ export default (sequence)=> {
 
     let trace = Array.from(Array(sequence.length), () => null);
 
-    let tailIndices = sequence.reduce((tailIndices, element, index)=>{
-        if(tailIndices.length == 0) { return [0]; }
+    let tailIndices = sequence.reduce((tails, element, index)=>{
+        if(tails.length == 0) { return [0]; }
 
-        let low = sequence[tailIndices[0]],
-            high = sequence[tailIndices[tailIndices.length-1]];
+        let low = sequence[tails[0]],
+            high = sequence[tails[tails.length-1]];
 
         if (element > high) {
-            trace[index] = tailIndices[tailIndices.length-1];
-            tailIndices.push(index);
+            trace[index] = tails[tails.length-1];
+            tails.push(index);
         } else if (element < low) {
-            tailIndices[0] = index;
+            tails[0] = index;
         } else {
-            let indexToBump = findNextHighest(sequence, tailIndices, element);
-            tailIndices[indexToBump] = index;
-            trace[tailIndices[indexToBump]] = tailIndices[indexToBump-1];
+            let indexToBump = findNextHighest(sequence, tails, element);
+            tails[indexToBump] = index;
+            trace[tails[indexToBump]] = tails[indexToBump-1];
         }
-        return tailIndices;
+        return tails;
     }, []);
 
     return unfoldLongestSubsequence(sequence, tailIndices, trace);

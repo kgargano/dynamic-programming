@@ -46,7 +46,7 @@ export default (sequence)=> {
         } else {
             let indexToBump = findNextHighest(sequence, tails, element);
             tails[indexToBump] = index;
-            trace[tails[indexToBump]] = tails[indexToBump-1];
+            trace[index] = tails[indexToBump-1];
         }
         return tails;
     }, []);

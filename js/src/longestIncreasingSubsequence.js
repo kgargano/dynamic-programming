@@ -1,13 +1,13 @@
 //referenced this: https://github.com/mission-peace/interview/blob/master/src/com/interview/array/LongestIncreasingSubSequenceOlogNMethod.java
-const searchForBump = (sequence, subsequenceTails, element)=>{
+const findNextHighest = (sequence, subsequenceTails, element)=>{
     let low = 0,
         high = subsequenceTails.length;
 
     while(high >= low){
         let mid = Math.floor((high + low) / 2);
-        if(sequence[subsequenceTails[mid]] < element && sequence[subsequenceTails[mid+1]] >= element){
+        if(element > sequence[subsequenceTails[mid]] && element <= sequence[subsequenceTails[mid+1]] ){
             return mid+1;
-        } else if (sequence[subsequenceTails[mid]] < element){
+        } else if (element > sequence[subsequenceTails[mid]]){
             low = mid + 1;
         }else{
             high = mid - 1;
@@ -35,7 +35,7 @@ export default (sequence)=> {
         else if (element < low){
             subsequenceTails[0] = index;
         }else{
-            let indexToBump = searchForBump(sequence, subsequenceTails, element);
+            let indexToBump = findNextHighest(sequence, subsequenceTails, element);
             subsequenceTails[indexToBump] = index;
             subsequenceTrace[subsequenceTails[indexToBump]] = subsequenceTails[indexToBump-1];
         }

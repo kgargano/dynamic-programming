@@ -1,6 +1,6 @@
 import largestSumContiguousSequence from './largestSumContiguousSequence'
 
-describe.only('largest sum contiguous sequence tests', ()=>{
+describe('largest sum contiguous sequence tests', ()=>{
     describe('when running a sequence of one element', () => {
         let sequence = [1],
             actual = largestSumContiguousSequence(sequence);

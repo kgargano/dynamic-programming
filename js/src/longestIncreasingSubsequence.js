@@ -17,6 +17,17 @@ const findNextHighest = (sequence, subsequenceTails, element)=>{
 };
 
 
+const unfoldLongestSubsequence = (sequence, tails, trace)=>{
+
+    let longestSequence = [];
+    let nextElementIndex = tails[tails.length-1];
+    while(nextElementIndex != null){
+        longestSequence.push(sequence[nextElementIndex]);
+        nextElementIndex = trace[nextElementIndex];
+    }
+    return longestSequence.reverse();
+};
+
 export default (sequence)=> {
     if(sequence.length == 0) return sequence;
 
@@ -42,14 +53,5 @@ export default (sequence)=> {
         return subsequenceTails;
     }, [0]);
 
-    let longestSequence = [];
-    let nextElementIndex = subsequenceTails[subsequenceTails.length-1];
-    while(nextElementIndex != null){
-        longestSequence.push(sequence[nextElementIndex]);
-        nextElementIndex = subsequenceTrace[nextElementIndex];
-    }
-
-
-    longestSequence = longestSequence.reverse();
-    return longestSequence;
+    return unfoldLongestSubsequence(sequence, subsequenceTails, subsequenceTrace);
 };

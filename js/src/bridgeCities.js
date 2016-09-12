@@ -1,24 +1,60 @@
+const findNextHighest = (bridges, tails, bridge)=>{
+    let low = 0,
+        high = tails.length;
+
+    while(high >= low){
+        let mid = Math.floor((high+low)/2);
+
+        if(bridge.north > bridges[tails[mid]].north && bridge.north <= bridges[tails[mid+1]].north){
+            return mid+1;
+        }else if(bridge.north > bridges[tails[mid]]){
+            low = mid+1;
+        }else{
+            high = mid-1;
+        }
+    }
+    return high;
+};
+
 export default (cities)=>{
+    if(cities.length == 0) { return '';}
     let n = cities[0].split(''),
         s = cities[1].split(''),
         nLocations = n.reduce((map, city, index)=>  { map[city] = index; return map; } , {}),
         bridges = s.map((city, index)=> ({ south: index, north: nLocations[city], city }));
 
-    console.log('start')
-    console.log('nlocations', nLocations, 'n', n, 's', s, 'bridges', bridges)
-    return bridges.reduce((bridgedCities, bridge)=>{
 
-        let subsequences = bridgedCities.filter(b=> b[0].north < bridge.north);
-        console.log('subsequences', subsequences);
-        if(subsequences.length == 0){
-            bridgedCities.unshift([bridge]);
-            console.log('made a new one with ', bridge)
+    let sequenceTrace = Array.from(Array(bridges.length), (b)=>null);
+
+    let tailIndices =  bridges.reduce((tailIndices, bridge, index)=>{
+        if(tailIndices.length == 0) { return [0];}
+
+        let low = bridges[tailIndices[0]].north,
+            high = bridges[tailIndices[tailIndices.length-1]].north;
+
+        if(bridge.north > high){
+            sequenceTrace[index] = tailIndices[tailIndices.length-1];
+            tailIndices.push(index);
+        }else if(bridge.north < low){
+            tailIndices[0] = index;
         }else{
-            subsequences.forEach(b=> b.unshift(bridge));
-            console.log('adding to each found')
+            let nextHighestIndex = findNextHighest(bridges, tailIndices, bridge);
+
         }
 
-        console.log('bridgedCities', bridgedCities)
-        return bridgedCities;
-    }, []).sort((b1, b2)=> b2.length - b1.length).map(b=> b.reverse().map(c=>c.city).join(''))[0];
+        return tailIndices;
+    }, []);
+
+
+    console.log("START");
+    console.log("tails", tailIndices);
+    let result = [];
+    let b = tailIndices[tailIndices.length-1];
+    while(b != null){
+        result.push(bridges[b].city);
+        b = sequenceTrace[b];
+    }
+    console.log('result', result, result.join(''))
+
+    return result.reverse().join('');
 }

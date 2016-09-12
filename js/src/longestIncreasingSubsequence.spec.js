@@ -1,6 +1,6 @@
 import longestIncreasingSubsequence from './longestIncreasingSubsequence'
 
-describe.only('longest increasing subsequence', ()=>{
+describe('longest increasing subsequence', ()=>{
     describe('when running a sequence of one element', () => {
         let sequence = [1];
         it('it should return a subsequence of that element', () => {

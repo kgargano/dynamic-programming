@@ -5,9 +5,10 @@ const findNextHighest = (bridges, tails, bridge)=>{
     while(high >= low){
         let mid = Math.floor((high+low)/2);
 
-        if(bridge.north > bridges[tails[mid]].north && bridge.north <= bridges[tails[mid+1]].north){
+        console.log('sorting', bridges, high, mid, low);
+        if(bridge.north > bridges[tails[mid]].north && bridge.south <= bridges[tails[mid+1]].north){
             return mid+1;
-        }else if(bridge.north > bridges[tails[mid]]){
+        }else if(bridge.north > bridges[tails[mid]].north){
             low = mid+1;
         }else{
             high = mid-1;
@@ -21,8 +22,7 @@ export default (cities)=>{
     let n = cities[0].split(''),
         s = cities[1].split(''),
         nLocations = n.reduce((map, city, index)=>  { map[city] = index; return map; } , {}),
-        bridges = s.map((city, index)=> ({ south: index, north: nLocations[city], city }));
-
+        bridges = s.map((city, index)=> ({ south: index, north: nLocations[city], city })).filter(b=> b.north);
 
     let sequenceTrace = Array.from(Array(bridges.length), (b)=>null);
 
@@ -38,23 +38,21 @@ export default (cities)=>{
         }else if(bridge.north < low){
             tailIndices[0] = index;
         }else{
+            
             let nextHighestIndex = findNextHighest(bridges, tailIndices, bridge);
-
+            tailIndices[nextHighestIndex] = index;
+            sequenceTrace[index] = tailIndices[nextHighestIndex-1];
         }
 
         return tailIndices;
     }, []);
 
-
-    console.log("START");
-    console.log("tails", tailIndices);
     let result = [];
     let b = tailIndices[tailIndices.length-1];
     while(b != null){
         result.push(bridges[b].city);
         b = sequenceTrace[b];
     }
-    console.log('result', result, result.join(''))
 
     return result.reverse().join('');
 }

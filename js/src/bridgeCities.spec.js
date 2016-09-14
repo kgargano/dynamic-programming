@@ -1,6 +1,6 @@
 import bridgeCities from './bridgeCities'
 
-describe.only('city bridging', ()=>{
+describe('city bridging', ()=>{
     describe('when there are no cities to bridge', ()=>{
         let bridgedCities = bridgeCities([]);
         it('it returns an empty result', ()=>{

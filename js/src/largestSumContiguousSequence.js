@@ -5,9 +5,8 @@ export default (sequence)=> {
 
     return sequence.slice(1).reduce( (current, element) => {
         let { subsequence, max, sum, maxSequence } = current;
-        sum = Math.max(sum, 0);
 
-        if(sum <= 0 && element > sum){
+        if(sum < 0 && element > sum){
             sum = 0;
             subsequence = [];
         }

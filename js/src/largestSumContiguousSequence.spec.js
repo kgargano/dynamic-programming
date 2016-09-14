@@ -153,6 +153,28 @@ describe('largest sum contiguous sequence tests', ()=>{
             actual.maxSequence.should.deep.equal([20, 40, -5, 10]);
         });
     });
+
+    describe('when running a sequence [-1, -2, -3, -4, -5]', () => {
+        let sequence = [-5, -4, -3, -2, -1],
+            actual = largestSumContiguousSequence(sequence);
+        it('it should return -1 as the max', () => {
+            actual.max.should.equal(-1);
+        });
+        it('it should return a subsequence [-1]', ()=>{
+            actual.maxSequence.should.deep.equal([-1]);
+        });
+    });
+
+    describe('when running a sequence [-5, -4, -3, -2, -1]', () => {
+        let sequence = [-5, -4, -3, -2, -1],
+            actual = largestSumContiguousSequence(sequence);
+        it('it should return -1 as the max', () => {
+            actual.max.should.equal(-1);
+        });
+        it('it should return a subsequence [-1]', ()=>{
+            actual.maxSequence.should.deep.equal([-1]);
+        });
+    });
 });
 
 
